@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <title>WASM Interop - Web - Pi Approximation</title>
+</head>
+
+<body>
+    <main class="container-fluid">
+        <nav>
+            <ul>
+                <li><strong>WASM Interop - Web - Pi Approximation</strong></li>
+            </ul>
+            <ul>
+                <li><a href="./index.html" class="contrast">Home</a></li>
+                <li><a href="./piApprox.html" class="contrast">Pi Approximation</a></li>
+                <li><a href="#" class="contrast">String Transformation</a></li>
+                <li><a href="#" class="contrast">TBA</a></li>
+                <li>
+                    <label id="theme-switch-label">
+                        <input type="checkbox" role="switch" id="theme-switch" />
+                    </label>
+                </li>
+            </ul>
+        </nav>
+        <div class="grid">
+            <label for="n-input">
+                Enter N (how many times the approximation will be ran, e.g. 10000000):
+                <input type="number" id="n-input" name="n-input" placeholder="10000000" min="1" required>
+            </label>
+        </div>
+        <div class="grid">
+            <div>
+                <h3>Client-side (JS)</h3>
+                <button id="run-client-js">Run</button>
+                <div>
+                    <p>Result: <span id="client-js-result">-</span></p>
+                    <p>Time: <span id="client-js-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Client-side (WASM)</h3>
+                <button id="run-client-wasm">Run</button>
+                <div>
+                    <p>Result: <span id="client-wasm-result">-</span></p>
+                    <p>Time: <span id="client-wasm-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Server-side (Python)</h3>
+                <button id="run-server-python">Run</button>
+                <div>
+                    <p>Result: <span id="server-python-result">-</span></p>
+                    <p>Time: <span id="server-python-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Server-side (WASM)</h3>
+                <button id="run-server-wasm">Run</button>
+                <div>
+                    <p>Result: <span id="server-wasm-result">-</span></p>
+                    <p>Time: <span id="server-wasm-time">-</span> ms</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="./assets/js/utils/themeSwitcher.js"></script>
+<script type="module" src="./assets/js/piApprox/index.js"></script>
+
+</html>

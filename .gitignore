@@ -1,0 +1,15 @@
+# Python
+python/.venv
+python/**/__pycache__
+
+# Web app
+web/node_modules
+
+# wasm-pack
+wasmpack/**/.github
+wasmpack/**/README.md
+wasmpack/**/LICENSE_*
+wasmpack/**/build_result
+
+# locations where compiled wasm is stored
+python/**/wasm_modules
