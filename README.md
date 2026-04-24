@@ -21,14 +21,11 @@ Main PowerShell scripts are located at the root of the project. The helper scrip
 
 ## Rust to WASM via wasm-pack
 
-This project uses [wasm-pack](https://github.com/wasm-bindgen/wasm-pack) to compile Rust into WebAssembly modules. To compile the module, go to the directory of the functionality you need, then run `wasm-pack build --target web`.
+This project uses [wasm-pack](https://github.com/wasm-bindgen/wasm-pack) to compile Rust into WebAssembly modules. To compile the module, go to the directory of the functionality you need, then either run `wasm-pack build --target web --features js` to build for JS use or run `cargo build --target wasm32-unknown-unknown --release` for Python use.
 
-This will give you multiple artifacts in the `pkg` directory, namely `xxx_bg.wasm` and `xxx.js`, where `xxx` is the name of your project. Those files are to be copied as such:
-1. Both files to `web/public/assets/js/xxx/wasm`, where `xxx` is the name of the intended benchmark,
-2. The `.wasm` file to `python/xxx`, where `xxx` is the name of the intended benchmark.
-If you wish to explore how exactly those exports are used, look at existing examples, e.g. `pi-approx`.
+The build results are handled differently per the build target. Typically, the `wasm` folder for JS will be moved from the `pkg` directory to the `web/public/assets/js/xxx/wasm` directory, where `xxx` is the name of the benchmark. For Python, the `.wasm` file will be moved from the `target\wasm32-unknown-unknown\release` directory to the `python/wasm_modules` directory. If you need any more info, look at the build scripts in `powershell/wasm`, as those are typically used to make building and moving WebAssembly modules easier.
 
-If you wish to create a new WebAssembly module, use the `wasm-pack new new-package-name` command first. Keep in mind that both a simple, JS-compatible export for a function and a raw one need to be created. Follow the examples provided in existing modules, e.g. `pi-approx`, to figure out how exactly to structure and create the project.
+If you wish to create a new WebAssembly module, use the `wasm-pack new xxx` command first, where `xxx` is the name of your future module. Keep in mind that both a simple, JS-compatible export for a function and a raw one need to be created. Follow the examples provided in existing modules, e.g. `pi-approx`, to figure out how exactly to structure and create the project.
 
 ## Python
 
