@@ -7,7 +7,7 @@ The following paragraphs describe how the project is structured and what the nee
 ## Prerequisites
 
 Make sure that you have these programs and utilities installed:
-- [Node.js](https://nodejs.org/en), preferrably at least version 20.14.0 which is what was used to test the project;
+- [Node.js](https://nodejs.org/en), preferrably at least version [20.14.0](https://nodejs.org/download/release/v20.14.0/) which is what was used to test the project;
 - [Python 3](https://www.python.org/downloads/), preferrably version [3.11.9](https://www.python.org/downloads/release/python-3119/) which is what was used to test the project;
 - [Rust](https://rust-lang.org/tools/install/), the latest version of which was used to test the project;
 - [wasm-pack](https://github.com/wasm-bindgen/wasm-pack), which can be installed with `cargo install wasm-pack` once Rust has been installed, see more about the cargo package [here](https://crates.io/crates/wasm-pack).
