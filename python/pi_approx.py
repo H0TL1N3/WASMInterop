@@ -1,7 +1,7 @@
 from wasm_runtime import WasmRuntime
 
 # WASM load
-_runtime = WasmRuntime("wasm_modules\pi_approx.wasm")
+_runtime = WasmRuntime("wasm_modules/pi_approx.wasm")
 
 # Internal funcs
 def pi_approx_python_internal(n: int):

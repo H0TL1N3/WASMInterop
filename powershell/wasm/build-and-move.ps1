@@ -4,14 +4,19 @@
 # Comment out anything you might not need.
 
 param (
-    [string]$PiApproxRoot,
+    [Parameter(Mandatory = $true)]
+    [string]$SourceRoot,
+
+    [Parameter(Mandatory = $true)]
     [string]$JsOutDir,
+
+    [Parameter(Mandatory = $true)]
     [string]$RawOutDir
 )
 
 $ErrorActionPreference = "Stop"
 
-$BuildDir = Join-Path $PiApproxRoot "build_result"
+$BuildDir = Join-Path $SourceRoot "build_result"
 $JsBuildDir = Join-Path $BuildDir "js"
 $RawBuildDir = Join-Path $BuildDir "raw"
 
@@ -23,18 +28,18 @@ New-Item -ItemType Directory -Path $RawBuildDir | Out-Null
 
 # Build JS (wasm-pack) and move it
 Write-Host "==> Building JS (wasm-pack)"
-Push-Location $PiApproxRoot
+Push-Location $SourceRoot
 wasm-pack build --target web --features js
 Pop-Location
 Write-Host "==> Copying JS build output"
-Copy-Item -Path (Join-Path $PiApproxRoot "pkg\*") -Destination $JsBuildDir -Recurse
+Copy-Item -Path (Join-Path $SourceRoot "pkg\*") -Destination $JsBuildDir -Recurse
 
 # Build raw WASM (cargo) and move it
 Write-Host "==> Building raw WASM (cargo)"
-Push-Location $PiApproxRoot
+Push-Location $SourceRoot
 cargo build --target wasm32-unknown-unknown --release
 Pop-Location
-$RawWasmPath = Join-Path $PiApproxRoot "target\wasm32-unknown-unknown\release"
+$RawWasmPath = Join-Path $SourceRoot "target\wasm32-unknown-unknown\release"
 $WasmFile = Get-ChildItem -Path $RawWasmPath -Filter "*.wasm" | Select-Object -First 1
 if (-not $WasmFile) {
     throw "Raw WASM file not found!"
@@ -53,8 +58,8 @@ Copy-Item -Path "$RawBuildDir\*" -Destination $RawOutDir -Recurse -Force
 
 # Cleanup build results
 Write-Host "==> Cleaning up intermediate build folders"
-Remove-Item (Join-Path $PiApproxRoot "pkg") -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item (Join-Path $PiApproxRoot "target") -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item (Join-Path $SourceRoot "pkg") -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item (Join-Path $SourceRoot "target") -Recurse -Force -ErrorAction SilentlyContinue
 
 # All is done :)
 Write-Host "==> Build complete!"
