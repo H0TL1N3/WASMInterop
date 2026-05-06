@@ -7,14 +7,14 @@
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="./assets/css/index.css">
-    <title>WASM Interop - Web - Pi Approximation</title>
+    <title>WASM Interop - Web - Sieve of Eratosthenes</title>
 </head>
 
 <body>
     <main class="container-fluid">
         <nav>
             <ul>
-                <li><strong>WASM Interop - Web - Pi Approximation</strong></li>
+                <li><strong>WASM Interop - Web - Sieve of Eratosthenes</strong></li>
             </ul>
             <ul>
                 <li><a href="./index.html" class="contrast">Home</a></li>
@@ -32,7 +32,7 @@
         </nav>
         <div class="grid">
             <label for="n-input">
-                Enter N (how many times the approximation will be ran, e.g. 10000000):
+                Enter N (up to which number primes will be found, e.g. 10000000):
                 <input type="number" id="n-input" name="n-input" placeholder="10000000" min="1" required>
             </label>
         </div>
@@ -73,6 +73,6 @@
     </main>
 </body>
 <script src="./assets/js/utils/themeSwitcher.js"></script>
-<script type="module" src="./assets/js/piApprox/index.js"></script>
+<script type="module" src="./assets/js/sieve/index.js"></script>
 
 </html>

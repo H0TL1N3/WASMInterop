@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from pi_approx import pi_approx_python_internal, pi_approx_wasm_internal
 from nested_loops import nested_loops_python_internal, nested_loops_wasm_internal
+from sieve import sieve_python_internal, sieve_wasm_internal
 
 app = FastAPI()
 
@@ -51,6 +52,26 @@ def nested_loops_wasm(n: int):
     start_time = time.time()
 
     result = nested_loops_wasm_internal(n)
+
+    finish_time = time.time() - start_time
+
+    return {"result": result, "time": finish_time}
+
+@app.get("/python/sieve/{n}")
+def sieve_python(n: int):
+    start_time = time.time()
+
+    result = sieve_python_internal(n)
+
+    finish_time = time.time() - start_time
+
+    return {"result": result, "time": finish_time}
+
+@app.get("/wasm/sieve/{n}")
+def sieve_wasm(n: int):
+    start_time = time.time()
+
+    result = sieve_wasm_internal(n)
 
     finish_time = time.time() - start_time
 
