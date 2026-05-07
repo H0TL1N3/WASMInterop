@@ -1,7 +1,4 @@
-// Update if you change the port of the Python API
-export const API_BASE_URL = "http://localhost:8000";
-
-export const BUBBLE_SORT_ARRAY = [
+BUBBLE_SORT_LIST = [
     147,
     245,
     952,
@@ -1002,4 +999,4 @@ export const BUBBLE_SORT_ARRAY = [
     897,
     856,
     630
-];
+]

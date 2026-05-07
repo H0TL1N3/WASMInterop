@@ -7,14 +7,14 @@
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="./assets/css/index.css">
-    <title>WASM Interop - Web - Nested Loops</title>
+    <title>WASM Interop - Web - Bubble Sort</title>
 </head>
 
 <body>
     <main class="container-fluid">
         <nav>
             <ul>
-                <li><strong>WASM Interop - Web - Nested Loops</strong></li>
+                <li><strong>WASM Interop - Web - Bubble Sort</strong></li>
             </ul>
             <ul>
                 <li><a href="./index.html" class="contrast">Home</a></li>
@@ -32,10 +32,10 @@
             </ul>
         </nav>
         <div class="grid">
-            <label for="n-input">
-                Enter N (how many times the main loop will be ran, e.g. 2500):
-                <input type="number" id="n-input" name="n-input" placeholder="2500" min="1" required>
-            </label>
+            The array has been generated in advance.
+            It is randomised and is 1000 numbers in length.
+            The array is stored on the frontend (JS) and on the backend (Python).
+            Update the values in the code or run as-is by pressing the relevant buttons.
         </div>
         <div class="grid">
             <div>
@@ -74,6 +74,6 @@
     </main>
 </body>
 <script src="./assets/js/utils/themeSwitcher.js"></script>
-<script type="module" src="./assets/js/nestedLoops/index.js"></script>
+<script type="module" src="./assets/js/bubbleSort/index.js"></script>
 
 </html>

@@ -11,7 +11,10 @@ param (
     [string]$JsOutDir,
 
     [Parameter(Mandatory = $true)]
-    [string]$RawOutDir
+    [string]$RawOutDir,
+
+    [Parameter(Mandatory = $false)]
+    [string]$Name = "unknown"
 )
 
 $ErrorActionPreference = "Stop"
@@ -19,6 +22,9 @@ $ErrorActionPreference = "Stop"
 $BuildDir = Join-Path $SourceRoot "build_result"
 $JsBuildDir = Join-Path $BuildDir "js"
 $RawBuildDir = Join-Path $BuildDir "raw"
+
+# Write name to identify powershell window
+Write-Host "==> Building WebAssembly module with the name: $Name"
 
 # Intermediate directory recreation
 Write-Host "==> Creating intermediary build directory"

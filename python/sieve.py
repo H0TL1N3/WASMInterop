@@ -29,18 +29,18 @@ def sieve_python_internal(n: int):
     return result
 
 def sieve_wasm_internal(n: int):
-    # Call WASM function, calculate, get length, return early in an edge case
+    # Call Wasm function, calculate, get length, return early in an edge case
     ptr = _runtime.call("sieve_raw", n)
     length = _runtime.call("sieve_len")
     if length == 0:
         return []
 
-    # Access WASM memory, read the u32 array, convert it into Python list via struct
+    # Access Wasm memory, read the u32 array, convert it into Python list via struct
     memory = _runtime.instance.exports(_runtime.store)["memory"]
     data = memory.read(_runtime.store, ptr, ptr + length * 4)
     result = list(struct.unpack(f"{length}I", data))
 
-    # Free WASM memory (since length != 0) and return
+    # Free Wasm memory (since length != 0) and return
     _runtime.call("sieve_free", ptr, length)
 
     return result
