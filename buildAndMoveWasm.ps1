@@ -2,13 +2,17 @@ $psWasmScriptPath = "$PSScriptRoot\powershell\wasm"
 
 $rustPiApproxPath = "$PSScriptRoot\wasmpack\pi-approx"
 $rustNestedLoopsPath = "$PSScriptRoot\wasmpack\nested-loops"
+$rustFibonacciPath = "$PSScriptRoot\wasmpack\fibonacci"
 $rustSievePath = "$PSScriptRoot\wasmpack\sieve"
 $rustBubbleSortPath = "$PSScriptRoot\wasmpack\bubble-sort"
+$rustQuickSortPath = "$PSScriptRoot\wasmpack\quick-sort"
 
 $jsWasmPiApproxPath = "$PSScriptRoot\web\public\assets\js\piApprox\wasm"
 $jsWasmNestedLoopsPath = "$PSScriptRoot\web\public\assets\js\nestedLoops\wasm"
+$jsWasmFibonacciPath = "$PSScriptRoot\web\public\assets\js\fibonacci\wasm"
 $jsWasmSievePath = "$PSScriptRoot\web\public\assets\js\sieve\wasm"
 $jsWasmBubbleSortPath = "$PSScriptRoot\web\public\assets\js\bubbleSort\wasm"
+$jsWasmQuickSortPath = "$PSScriptRoot\web\public\assets\js\quickSort\wasm"
 
 $rawWasmPath = "$PSScriptRoot\python\wasm_modules"
 
@@ -30,6 +34,15 @@ Start-Process powershell `
 "-RawOutDir", $rawWasmPath,
 "-Name", "nested-loops"
 
+# Build and move fibonacci
+Start-Process powershell `
+    -WorkingDirectory $rustFibonacciPath `
+    -ArgumentList "-File", "$psWasmScriptPath\build-and-move.ps1",
+"-SourceRoot", $rustFibonacciPath,
+"-JsOutDir", $jsWasmFibonacciPath,
+"-RawOutDir", $rawWasmPath,
+"-Name", "fibonacci"
+
 # Build and move sieve
 Start-Process powershell `
     -WorkingDirectory $rustSievePath `
@@ -47,3 +60,12 @@ Start-Process powershell `
 "-JsOutDir", $jsWasmBubbleSortPath,
 "-RawOutDir", $rawWasmPath,
 "-Name", "bubble-sort"
+
+# Build and move quick-sort
+Start-Process powershell `
+    -WorkingDirectory $rustQuickSortPath `
+    -ArgumentList "-File", "$psWasmScriptPath\build-and-move.ps1",
+"-SourceRoot", $rustQuickSortPath,
+"-JsOutDir", $jsWasmQuickSortPath,
+"-RawOutDir", $rawWasmPath,
+"-Name", "quick-sort"

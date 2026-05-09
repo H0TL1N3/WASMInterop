@@ -6,8 +6,8 @@ static mut LAST_LEN: usize = 0;
 
 // Create read-only pointer and allocate memory
 #[no_mangle]
-pub extern "C" fn bubble_sort_input_alloc(len: usize) -> *mut i32 {
-    let mut v = vec![0i32; len];
+pub extern "C" fn quick_sort_input_alloc(len: usize) -> *mut f64 {
+    let mut v = vec![0f64; len];
     let ptr = v.as_mut_ptr();
     std::mem::forget(v);
     return ptr;
@@ -15,7 +15,7 @@ pub extern "C" fn bubble_sort_input_alloc(len: usize) -> *mut i32 {
 
 // Clear from read-only pointer
 #[no_mangle]
-pub extern "C" fn bubble_sort_input_dealloc(ptr: *mut i32, len: usize) {
+pub extern "C" fn quick_sort_input_dealloc(ptr: *mut f64, len: usize) {
     unsafe {
         let _ = Vec::from_raw_parts(ptr, len, len);
     }
@@ -24,14 +24,14 @@ pub extern "C" fn bubble_sort_input_dealloc(ptr: *mut i32, len: usize) {
 // Pass read-only pointer, return new pointer (similar to sieve)
 // Main sorting function
 #[no_mangle]
-pub extern "C" fn bubble_sort_raw(in_ptr: *const i32, len: usize) -> *mut i32 {
+pub extern "C" fn quick_sort_raw(in_ptr: *const f64, len: usize) -> *mut f64 {
     let input = unsafe {
         std::slice::from_raw_parts(in_ptr, len)
     };
 
     // Clone to avoid mutation
-    let mut vec = input.to_vec();
-    let sorted = core::bubble_sort(vec);
+    let vec = input.to_vec();
+    let sorted = core::quick_sort(vec);
 
     unsafe {
         LAST_LEN = sorted.len();
@@ -46,13 +46,13 @@ pub extern "C" fn bubble_sort_raw(in_ptr: *const i32, len: usize) -> *mut i32 {
 
 // We need to return length to use with the pointer
 #[no_mangle]
-pub extern "C" fn bubble_sort_len() -> usize {
+pub extern "C" fn quick_sort_len() -> usize {
     return unsafe { LAST_LEN };
 }
 
 // We also need a free function after we use the pointer with length
 #[no_mangle]
-pub extern "C" fn bubble_sort_free(ptr: *mut i32, len: usize) {
+pub extern "C" fn quick_sort_free(ptr: *mut f64, len: usize) {
     unsafe {
         let _ = Vec::from_raw_parts(ptr, len, len);
     }

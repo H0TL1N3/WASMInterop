@@ -7,29 +7,30 @@
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="./assets/css/index.css">
-    <title>WASM Interop - Web - Nested Loops</title>
+    <title>WASM Interop - Web - Fibonacci</title>
 </head>
 
 <body>
     <main class="container-fluid">
         <nav>
             <ul>
-                <li><strong>WASM Interop - Web - Nested Loops</strong></li>
+                <li><strong>WASM Interop - Web - Fibonacci</strong></li>
             </ul>
             <ul>
                 <li>
                     <div id="navigation-dropdown-container"></div>
                 </li>
-                <label id="theme-switch-label">
-                    <input type="checkbox" role="switch" id="theme-switch" />
-                </label>
+                <li>
+                    <label id="theme-switch-label">
+                        <input type="checkbox" role="switch" id="theme-switch" />
+                    </label>
                 </li>
             </ul>
         </nav>
         <div class="grid">
             <label for="n-input">
-                Enter N (how many times the main loop will be ran, e.g. 2500):
-                <input type="number" id="n-input" name="n-input" placeholder="2500" min="1" required>
+                Enter N (nth Fibonacci number, e.g. 30):
+                <input type="number" id="n-input" name="n-input" placeholder="30" min="1" required>
             </label>
         </div>
         <div class="grid">
@@ -70,6 +71,6 @@
 </body>
 <script src="./assets/js/utils/themeSwitcher.js"></script>
 <script type="module" src="./assets/js/utils/navigation.js"></script>
-<script type="module" src="./assets/js/nestedLoops/index.js"></script>
+<script type="module" src="./assets/js/fibonacci/index.js"></script>
 
 </html>

@@ -3,19 +3,8 @@ import loadWasm, {
 } from "./wasm/bubble_sort.js";
 
 import { displayResults } from "../utils/uiHandling.js";
-import { API_BASE_URL, BUBBLE_SORT_ARRAY } from "../const.js";
-
-// function used to generate the randomized array,
-// the array is stored as constants on both sides:
-// BUBBLE_SORT_ARRAY on the frontend
-// BUBBLE_SORT_LIST on the backend.
-// reference: https://stackoverflow.com/a/43044960
-function generateRandomArray(n) {
-    return Array.from(
-        { length: n },
-        () => Math.floor(Math.random() * n)
-    );
-}
+import { API_BASE_URL } from "../const.js";
+import { BUBBLE_SORT_ARRAY } from "./const.js";
 
 // Client JS implementation
 function bubbleSort(arr) {
