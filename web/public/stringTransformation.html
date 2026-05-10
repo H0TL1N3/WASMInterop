@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <title>WASM Interop - Web - String Transformation</title>
+</head>
+
+<body>
+    <main class="container-fluid">
+        <nav>
+            <ul>
+                <li><strong>WASM Interop - Web - String Transformation</strong></li>
+            </ul>
+            <ul>
+                <li>
+                    <div id="navigation-dropdown-container"></div>
+                </li>
+                <li>
+                    <label id="theme-switch-label">
+                        <input type="checkbox" role="switch" id="theme-switch" />
+                    </label>
+                </li>
+            </ul>
+        </nav>
+        <div class="grid">
+            The string has been generated in advance.
+            It is randomised and is 5000 symbols in length.
+            It consists of the word "test",
+            with every odd separator being an ASCII one,
+            and every even separator being a UTF-8 one.
+            The string is stored on the frontend (JS) and on the backend (Python).
+            Update the value in the code or run as-is by pressing the relevant buttons.
+        </div>
+        <div class="grid">
+            <div>
+                <h3>Client-side (JS)</h3>
+                <button id="run-client-js">Run</button>
+                <div>
+                    <p>Result: <span id="client-js-result">-</span></p>
+                    <p>Time: <span id="client-js-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Client-side (WASM)</h3>
+                <button id="run-client-wasm">Run</button>
+                <div>
+                    <p>Result: <span id="client-wasm-result">-</span></p>
+                    <p>Time: <span id="client-wasm-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Server-side (Python)</h3>
+                <button id="run-server-python">Run</button>
+                <div>
+                    <p>Result: <span id="server-python-result">-</span></p>
+                    <p>Time: <span id="server-python-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Server-side (WASM)</h3>
+                <button id="run-server-wasm">Run</button>
+                <div>
+                    <p>Result: <span id="server-wasm-result">-</span></p>
+                    <p>Time: <span id="server-wasm-time">-</span> ms</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="./assets/js/utils/themeSwitcher.js"></script>
+<script type="module" src="./assets/js/utils/navigation.js"></script>
+<script type="module" src="./assets/js/stringTransformation/index.js"></script>
+
+</html>

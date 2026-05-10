@@ -14,9 +14,11 @@ from sieve import sieve_python_internal, sieve_wasm_internal
 # For functions that pass arrays, ensure that at callsite a clone of the array is created
 from bubble_sort import bubble_sort_python_internal, bubble_sort_wasm_internal
 from quick_sort import quick_sort_python_internal, quick_sort_wasm_internal
+from string_transformation import string_transformation_python_internal, string_transformation_wasm_internal
 
 from const.bubble_sort import BUBBLE_SORT_LIST
 from const.quick_sort import QUICK_SORT_LIST
+from const.string_transformation import STRING_TRANSFORMATION
 
 app = FastAPI()
 
@@ -169,6 +171,28 @@ def quick_sort_short_wasm():
     start_time = time.perf_counter()
 
     result = quick_sort_wasm_internal(list_clone)
+
+    finish_time = (time.perf_counter() - start_time) * 1000
+
+    return {"result": result, "time": finish_time}
+
+@app.get("/python/stringTransformation")
+def string_transformation_python():
+    string_clone = STRING_TRANSFORMATION[:]
+    start_time = time.perf_counter()
+
+    result = string_transformation_python_internal(string_clone)
+
+    finish_time = (time.perf_counter() - start_time) * 1000
+
+    return {"result": result, "time": finish_time}
+
+@app.get("/wasm/stringTransformation")
+def string_transformation_wasm():
+    string_clone = STRING_TRANSFORMATION[:]
+    start_time = time.perf_counter()
+
+    result = string_transformation_wasm_internal(string_clone)
 
     finish_time = (time.perf_counter() - start_time) * 1000
 

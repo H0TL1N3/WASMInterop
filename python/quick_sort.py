@@ -36,7 +36,7 @@ def quick_sort_wasm_internal(arr: list[float]):
     for i, v in enumerate(arr):
         memory.write(_runtime.store, struct.pack("<d", v), in_ptr + i * 8)
 
-    # Access Wasm memory, read the u32 array, convert it into Python list via struct
+    # Access Wasm memory, read the f64 array, convert it into Python list via struct
     out_ptr = _runtime.call("quick_sort_raw", in_ptr, length)
     out_len = _runtime.call("quick_sort_len")
     data = memory.read(_runtime.store, out_ptr, out_ptr + out_len * 8)

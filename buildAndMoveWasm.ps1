@@ -6,6 +6,7 @@ $rustFibonacciPath = "$PSScriptRoot\wasmpack\fibonacci"
 $rustSievePath = "$PSScriptRoot\wasmpack\sieve"
 $rustBubbleSortPath = "$PSScriptRoot\wasmpack\bubble-sort"
 $rustQuickSortPath = "$PSScriptRoot\wasmpack\quick-sort"
+$rustStringTransformationPath = "$PSScriptRoot\wasmpack\string-transformation"
 
 $jsWasmPiApproxPath = "$PSScriptRoot\web\public\assets\js\piApprox\wasm"
 $jsWasmNestedLoopsPath = "$PSScriptRoot\web\public\assets\js\nestedLoops\wasm"
@@ -13,6 +14,7 @@ $jsWasmFibonacciPath = "$PSScriptRoot\web\public\assets\js\fibonacci\wasm"
 $jsWasmSievePath = "$PSScriptRoot\web\public\assets\js\sieve\wasm"
 $jsWasmBubbleSortPath = "$PSScriptRoot\web\public\assets\js\bubbleSort\wasm"
 $jsWasmQuickSortPath = "$PSScriptRoot\web\public\assets\js\quickSort\wasm"
+$jsWasmStringTransformationPath = "$PSScriptRoot\web\public\assets\js\stringTransformation\wasm"
 
 $rawWasmPath = "$PSScriptRoot\python\wasm_modules"
 
@@ -69,3 +71,12 @@ Start-Process powershell `
 "-JsOutDir", $jsWasmQuickSortPath,
 "-RawOutDir", $rawWasmPath,
 "-Name", "quick-sort"
+
+# Build and move string-transformation
+Start-Process powershell `
+    -WorkingDirectory $rustStringTransformationPath `
+    -ArgumentList "-NoExit", "-File", "$psWasmScriptPath\build-and-move.ps1",
+"-SourceRoot", $rustStringTransformationPath,
+"-JsOutDir", $jsWasmStringTransformationPath,
+"-RawOutDir", $rawWasmPath,
+"-Name", "string-transformation"
