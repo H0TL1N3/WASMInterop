@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <title>WASM Interop - Web - Dijkstra </title>
+</head>
+
+<body>
+    <main class="container-fluid">
+        <nav>
+            <ul>
+                <li><strong>WASM Interop - Web - Dijkstra</strong></li>
+            </ul>
+            <ul>
+                <li>
+                    <div id="navigation-dropdown-container"></div>
+                </li>
+                <li>
+                    <label id="theme-switch-label">
+                        <input type="checkbox" role="switch" id="theme-switch" />
+                    </label>
+                </li>
+            </ul>
+        </nav>
+        <div class="grid">
+            The input array has been generated in advance.
+            It is randomised and is 4000 entries in length.
+            The array is stored on the frontend (JS) and on the backend (Python).
+            Update the values in the code or run as-is by pressing the relevant buttons.
+            Check the values in the code if you wish to test others.
+        </div>
+        <div class="grid">
+            <label for="start-input">
+                Enter start point (from which point he path will be found, e.g. A):
+                <input id="start-input" name="start-input" placeholder="A" required>
+            </label>
+            <label for="end-input">
+                Enter end point (to which point the path will be found, e.g. B):
+                <input id="end-input" name="end-input" placeholder="B" required>
+            </label>
+        </div>
+        <div class="grid">
+            <div>
+                <h3>Client-side (JS)</h3>
+                <button id="run-client-js">Run</button>
+                <div>
+                    <p>Result: <span id="client-js-result">-</span></p>
+                    <p>Time: <span id="client-js-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Client-side (WASM)</h3>
+                <button id="run-client-wasm">Run</button>
+                <div>
+                    <p>Result: <span id="client-wasm-result">-</span></p>
+                    <p>Time: <span id="client-wasm-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Server-side (Python)</h3>
+                <button id="run-server-python">Run</button>
+                <div>
+                    <p>Result: <span id="server-python-result">-</span></p>
+                    <p>Time: <span id="server-python-time">-</span> ms</p>
+                </div>
+            </div>
+            <div>
+                <h3>Server-side (WASM)</h3>
+                <button id="run-server-wasm">Run</button>
+                <div>
+                    <p>Result: <span id="server-wasm-result">-</span></p>
+                    <p>Time: <span id="server-wasm-time">-</span> ms</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="./assets/js/utils/themeSwitcher.js"></script>
+<script type="module" src="./assets/js/utils/navigation.js"></script>
+<script type="module" src="./assets/js/dijkstra/index.js"></script>
+
+</html>

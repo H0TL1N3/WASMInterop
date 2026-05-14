@@ -7,6 +7,7 @@ $rustSievePath = "$PSScriptRoot\wasmpack\sieve"
 $rustBubbleSortPath = "$PSScriptRoot\wasmpack\bubble-sort"
 $rustQuickSortPath = "$PSScriptRoot\wasmpack\quick-sort"
 $rustStringTransformationPath = "$PSScriptRoot\wasmpack\string-transformation"
+$rustDijkstraPath = "$PSScriptRoot\wasmpack\dijkstra"
 
 $jsWasmPiApproxPath = "$PSScriptRoot\web\public\assets\js\piApprox\wasm"
 $jsWasmNestedLoopsPath = "$PSScriptRoot\web\public\assets\js\nestedLoops\wasm"
@@ -15,6 +16,7 @@ $jsWasmSievePath = "$PSScriptRoot\web\public\assets\js\sieve\wasm"
 $jsWasmBubbleSortPath = "$PSScriptRoot\web\public\assets\js\bubbleSort\wasm"
 $jsWasmQuickSortPath = "$PSScriptRoot\web\public\assets\js\quickSort\wasm"
 $jsWasmStringTransformationPath = "$PSScriptRoot\web\public\assets\js\stringTransformation\wasm"
+$jsWasmDijkstraPath = "$PSScriptRoot\web\public\assets\js\dijkstra\wasm"
 
 $rawWasmPath = "$PSScriptRoot\python\wasm_modules"
 
@@ -75,8 +77,18 @@ Start-Process powershell `
 # Build and move string-transformation
 Start-Process powershell `
     -WorkingDirectory $rustStringTransformationPath `
-    -ArgumentList "-NoExit", "-File", "$psWasmScriptPath\build-and-move.ps1",
+    -ArgumentList "-File", "$psWasmScriptPath\build-and-move.ps1",
 "-SourceRoot", $rustStringTransformationPath,
 "-JsOutDir", $jsWasmStringTransformationPath,
 "-RawOutDir", $rawWasmPath,
 "-Name", "string-transformation"
+
+# Build and move dijkstra
+Start-Process powershell `
+    -WorkingDirectory $rustDijkstraPath `
+    -ArgumentList "-File", "$psWasmScriptPath\build-and-move.ps1",
+"-SourceRoot", $rustDijkstraPath,
+"-JsOutDir", $jsWasmDijkstraPath,
+"-RawOutDir", $rawWasmPath,
+"-Name", "dijkstra",
+"-UseRawFeature"

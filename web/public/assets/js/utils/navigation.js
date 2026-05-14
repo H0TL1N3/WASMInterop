@@ -11,8 +11,12 @@ PAGE_ARRAY.forEach(page => {
     option.textContent = page.name;
     select.appendChild(option);
 });
-const current = window.location.pathname.split("/").pop();
-select.value = current;
+const currentPage = window.location.pathname.split("/").pop();
+if (PAGE_ARRAY.some((page) => page.link === currentPage)) {
+    select.value = currentPage;
+} else {
+    select.value = PAGE_ARRAY.find((page) => page.name === "Home").link;
+}
 
 // Handle navigation
 select.addEventListener("change", (e) => {

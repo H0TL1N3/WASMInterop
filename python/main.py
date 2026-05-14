@@ -15,10 +15,12 @@ from sieve import sieve_python_internal, sieve_wasm_internal
 from bubble_sort import bubble_sort_python_internal, bubble_sort_wasm_internal
 from quick_sort import quick_sort_python_internal, quick_sort_wasm_internal
 from string_transformation import string_transformation_python_internal, string_transformation_wasm_internal
+from dijkstra import dijkstra_python_internal, dijkstra_wasm_internal
 
 from const.bubble_sort import BUBBLE_SORT_LIST
 from const.quick_sort import QUICK_SORT_LIST
 from const.string_transformation import STRING_TRANSFORMATION
+from const.dijkstra import DIJKSTRA_OBJS_LIST
 
 app = FastAPI()
 
@@ -193,6 +195,28 @@ def string_transformation_wasm():
     start_time = time.perf_counter()
 
     result = string_transformation_wasm_internal(string_clone)
+
+    finish_time = (time.perf_counter() - start_time) * 1000
+
+    return {"result": result, "time": finish_time}
+
+@app.get("/python/dijkstra/{start}/{end}")
+def dijkstra_python(start: str, end: str):
+    list_clone = DIJKSTRA_OBJS_LIST.copy()
+    start_time = time.perf_counter()
+
+    result = dijkstra_python_internal(list_clone, start, end)
+
+    finish_time = (time.perf_counter() - start_time) * 1000
+
+    return {"result": result, "time": finish_time}
+
+@app.get("/wasm/dijkstra/{start}/{end}")
+def dijkstra_wasm(start: str, end: str):
+    list_clone = DIJKSTRA_OBJS_LIST.copy()
+    start_time = time.perf_counter()
+
+    result = dijkstra_wasm_internal(list_clone, start, end)
 
     finish_time = (time.perf_counter() - start_time) * 1000
 

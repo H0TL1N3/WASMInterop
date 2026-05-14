@@ -30,7 +30,7 @@ pub extern "C" fn bubble_sort_raw(in_ptr: *const i32, len: usize) -> *mut i32 {
     };
 
     // Clone to avoid mutation
-    let mut vec = input.to_vec();
+    let vec = input.to_vec();
     let sorted = core::bubble_sort(vec);
 
     unsafe {

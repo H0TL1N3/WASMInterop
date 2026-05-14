@@ -14,7 +14,9 @@ param (
     [string]$RawOutDir,
 
     [Parameter(Mandatory = $false)]
-    [string]$Name = "unknown"
+    [string]$Name = "unknown",
+
+    [switch]$UseRawFeature
 )
 
 $ErrorActionPreference = "Stop"
@@ -43,7 +45,12 @@ Copy-Item -Path (Join-Path $SourceRoot "pkg\*") -Destination $JsBuildDir -Recurs
 # Build raw WASM (cargo) and move it
 Write-Host "==> Building raw WASM (cargo)"
 Push-Location $SourceRoot
-cargo build --target wasm32-unknown-unknown --release
+if ($UseRawFeature) {
+    cargo build --target wasm32-unknown-unknown --release --features raw
+}
+else {
+    cargo build --target wasm32-unknown-unknown --release
+}
 Pop-Location
 $RawWasmPath = Join-Path $SourceRoot "target\wasm32-unknown-unknown\release"
 $WasmFile = Get-ChildItem -Path $RawWasmPath -Filter "*.wasm" | Select-Object -First 1
