@@ -1,5 +1,3 @@
-import struct
-
 from wasm_runtime import WasmRuntime
 
 # WASM load
@@ -42,7 +40,7 @@ def string_transformation_wasm_internal(string: str):
     memory = _runtime.instance.exports(_runtime.store)["memory"]
     memory.write(_runtime.store, input_bytes, in_ptr)
 
-    # Access Wasm memory, read the utf-8 string, convert it into Python list via struct
+    # Access Wasm memory, read the utf-8 string, convert it into Python string via data.decode
     out_ptr = _runtime.call("string_transformation_raw", in_ptr, length)
     out_len = _runtime.call("string_transformation_len")
     data = memory.read(_runtime.store, out_ptr, out_ptr + out_len)

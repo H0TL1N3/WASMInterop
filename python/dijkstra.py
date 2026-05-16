@@ -1,6 +1,5 @@
 from typing import List, TypedDict
 import json
-import struct
 
 from wasm_runtime import WasmRuntime
 
@@ -74,11 +73,9 @@ def dijkstra_wasm_internal(edges: list[Edge], start: str, end: str):
     memory = _runtime.instance.exports(_runtime.store)["memory"]
     memory.write(_runtime.store, input_bytes, in_ptr)
 
-    # Access Wasm memory, read the u32 array, convert it into Python list via struct
+    # Access Wasm memory, read the utf-8 string, convert it into Python string via data.decode
     out_ptr = _runtime.call("dijkstra_raw", in_ptr, length)
     out_len = _runtime.call("dijkstra_len")
-
-    # Access Wasm memory, read the utf-8 string
     data = memory.read(_runtime.store, out_ptr, out_ptr + out_len)
     result = data.decode("utf-8")
 
